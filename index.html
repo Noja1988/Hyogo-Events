@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>兵庫イベント収集所</title>
+
+  <style>
+
+    * {
+
+      box-sizing: border-box;
+
+    }
+
+    body {
+
+      margin: 0;
+
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans JP", sans-serif;
+
+      background: #f6f7f9;
+
+      color: #333;
+
+    }
+
+    header {
+
+      background: #1976d2;
+
+      color: white;
+
+      padding: 28px 20px;
+
+    }
+
+    header .inner {
+
+      max-width: 1100px;
+
+      margin: auto;
+
+    }
+
+    header h1 {
+
+      margin: 0 0 8px;
+
+      font-size: 30px;
+
+    }
+
+    header p {
+
+      margin: 0;
+
+      opacity: 0.9;
+
+    }
+
+    nav {
+
+      background: white;
+
+      border-bottom: 1px solid #ddd;
+
+      position: sticky;
+
+      top: 0;
+
+      z-index: 10;
+
+    }
+
+    nav .inner {
+
+      max-width: 1100px;
+
+      margin: auto;
+
+      display: flex;
+
+      gap: 10px;
+
+      overflow-x: auto;
+
+      padding: 12px 20px;
+
+    }
+
+    nav a {
+
+      color: #333;
+
+      text-decoration: none;
+
+      white-space: nowrap;
+
+      padding: 7px 14px;
+
+      border-radius: 20px;
+
+    }
+
+    nav a:hover {
+
+      background: #e3f2fd;
+
+    }
+
+    main {
+
+      max-width: 1100px;
+
+      margin: 30px auto;
+
+      padding: 0 20px;
+
+    }
+
+    .search-box {
+
+      background: white;
+
+      padding: 20px;
+
+      border-radius: 12px;
+
+      margin-bottom: 30px;
+
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+
+    }
+
+    .search-box input,
+
+    .search-box select {
+
+      padding: 12px;
+
+      border: 1px solid #ddd;
+
+      border-radius: 8px;
+
+      font-size: 15px;
+
+      margin-right: 8px;
+
+      margin-bottom: 8px;
+
+    }
+
+    .search-box input {
+
+      width: min(100%, 400px);
+
+    }
+
+    .section-title {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      margin-bottom: 15px;
+
+    }
+
+    .section-title h2 {
+
+      margin: 0;
+
+    }
+
+    .events {
+
+      display: grid;
+
+      grid-template-columns: repeat(3, 1fr);
+
+      gap: 20px;
+
+    }
+
+    .event-card {
+
+      background: white;
+
+      border-radius: 12px;
+
+      overflow: hidden;
+
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+
+      transition: transform 0.2s;
+
+    }
+
+    .event-card:hover {
+
+      transform: translateY(-3px);
+
+    }
+
+    .event-image {
+
+      height: 150px;
+
+      background: #ddd;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      color: #777;
+
+    }
+
+    .event-content {
+
+      padding: 18px;
+
+    }
+
+    .tag {
+
+      display: inline-block;
+
+      background: #e3f2fd;
+
+      color: #1976d2;
+
+      padding: 4px 9px;
+
+      border-radius: 12px;
+
+      font-size: 12px;
+
+      margin-bottom: 8px;
+
+    }
+
+    .event-content h3 {
+
+      margin: 5px 0 10px;
+
+      font-size: 19px;
+
+    }
+
+    .event-info {
+
+      color: #666;
+
+      font-size: 14px;
+
+      line-height: 1.8;
+
+    }
+
+    .detail-btn {
+
+      display: block;
+
+      margin-top: 14px;
+
+      text-align: center;
+
+      background: #1976d2;
+
+      color: white;
+
+      text-decoration: none;
+
+      padding: 10px;
+
+      border-radius: 7px;
+
+    }
+
+    footer {
+
+      margin-top: 60px;
+
+      padding: 30px;
+
+      background: #222;
+
+      color: white;
+
+      text-align: center;
+
+      font-size: 13px;
+
+    }
+
+    @media (max-width: 800px) {
+
+      .events {
+
+        grid-template-columns: repeat(2, 1fr);
+
+      }
+
+    }
+
+    @media (max-width: 550px) {
+
+      header h1 {
+
+        font-size: 24px;
+
+      }
+
+      .events {
+
+        grid-template-columns: 1fr;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<header>
+
+  <div class="inner">
+
+    <h1>兵庫イベント収集所</h1>
+
+    <p>兵庫県のお祭り・マルシェ・グルメ・ライブ・お出かけ情報をまとめます。</p>
+
+  </div>
+
+</header>
+
+<nav>
+
+  <div class="inner">
+
+    <a href="#">ホーム</a>
+
+    <a href="#">神戸</a>
+
+    <a href="#">明石</a>
+
+    <a href="#">加古川</a>
+
+    <a href="#">高砂</a>
+
+    <a href="#">姫路</a>
+
+    <a href="#">西宮</a>
+
+    <a href="#">淡路島</a>
+
+  </div>
+
+</nav>
+
+<main>
+
+  <section class="search-box">
+
+    <h2>🔎 イベントを探す</h2>
+
+    <input
+
+      type="text"
+
+      id="keyword"
+
+      placeholder="イベント名・地域など"
+
+      oninput="filterEvents()"
+
+    >
+
+    <select id="area" onchange="filterEvents()">
+
+      <option value="">すべての地域</option>
+
+      <option value="神戸">神戸</option>
+
+      <option value="明石">明石</option>
+
+      <option value="加古川">加古川</option>
+
+      <option value="高砂">高砂</option>
+
+      <option value="姫路">姫路</option>
+
+      <option value="西宮">西宮</option>
+
+      <option value="淡路島">淡路島</option>
+
+    </select>
+
+  </section>
+
+  <div class="section-title">
+
+    <h2>📅 兵庫のイベント</h2>
+
+  </div>
+
+  <section class="events" id="eventList">
+
+    <article class="event-card" data-area="神戸">
+
+      <div class="event-image">EVENT IMAGE</div>
+
+      <div class="event-content">
+
+        <span class="tag">神戸</span>
+
+        <h3>神戸グルメフェス</h3>
+
+        <div class="event-info">
+
+          📅 9月26日（土）<br>
+
+          📍 神戸市<br>
+
+          💰 入場無料
+
+        </div>
+
+        <a href="#" class="detail-btn">詳細を見る</a>
+
+      </div>
+
+    </article>
+
+    <article class="event-card" data-area="明石">
+
+      <div class="event-image">EVENT IMAGE</div>
+
+      <div class="event-content">
+
+        <span class="tag">明石</span>
+
+        <h3>明石マルシェ</h3>
+
+        <div class="event-info">
+
+          📅 9月27日（日）<br>
+
+          📍 明石市<br>
+
+          💰 入場無料
+
+        </div>
+
+        <a href="#" class="detail-btn">詳細を見る</a>
+
+      </div>
+
+    </article>
+
+    <article class="event-card" data-area="姫路">
+
+      <div class="event-image">EVENT IMAGE</div>
+
+      <div class="event-content">
+
+        <span class="tag">姫路</span>
+
+        <h3>姫路お城イベント</h3>
+
+        <div class="event-info">
+
+          📅 10月3日（土）<br>
+
+          📍 姫路市<br>
+
+          💰 無料
+
+        </div>
+
+        <a href="#" class="detail-btn">詳細を見る</a>
+
+      </div>
+
+  <article class="event-card" data-area="高砂">
+
+,  <img src="images/takasago.jpg" aly="高砂イベント">
+
+
+    <span class="tag">高砂</span>
+
+    <h3>高砂神社秋祭り</h3>
+
+    <div class="event-info">
+
+      📅 2026年10月10日（土） 〜 2026年10月11日（日）<br>
+
+      🕐 10/10（土）宵宮、10/11（日）本宮（例祭は本殿にて11:00〜、屋台の宮入り・練り合わせは午後）<br>
+
+      📍 高砂神社と高砂町内一円<br>
+
+      💰 観覧無料
+
+
+    </div>
+
+    <a href="https://www.city.takasago.lg.jp/soshikikarasagasu/citypromotionshitsu/kanko_tokusan/5/3259.html"
+
+       target="_blank"**
+       class="detail-btn">
+
+       詳細を見る
+
+    </a>
+
+  </div>
+
+</article>
+
+
+  </section>
+
+</main>
+
+<footer>
+
+  © 2026 兵庫イベント収集所
+
+</footer>
+
+<script>
+
+function filterEvents() {
+
+  const keyword =
+
+    document.getElementById("keyword").value.toLowerCase();
+
+  const area =
+
+    document.getElementById("area").value;
+
+  const events =
+
+    document.querySelectorAll(".event-card");
+
+  events.forEach(event => {
+
+    const text =
+
+      event.innerText.toLowerCase();
+
+    const eventArea =
+
+      event.dataset.area;
+
+    const keywordMatch =
+
+      text.includes(keyword);
+
+    const areaMatch =
+
+      area === "" || eventArea === area;
+
+    if (keywordMatch && areaMatch) {
+
+      event.style.display = "";
+
+    } else {
+
+      event.style.display = "none";
+
+    }
+
+  });
+
+}
+
+</script>
+
+</body>
+
+</html>
+
